@@ -47,7 +47,6 @@ const CityItem = ({city}) => {
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
-          <Button fullWidth color='primary' variant='contained'>Detalle</Button>
           <ExpandMore
             expand={expanded}
             onClick={handleExpandClick}

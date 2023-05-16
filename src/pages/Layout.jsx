@@ -1,5 +1,4 @@
 import * as React from 'react'
-import PropTypes from 'prop-types'
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
 import AppBar from '@mui/material/AppBar'
@@ -13,32 +12,12 @@ import BottomNavigation from '@mui/material/BottomNavigation'
 import BottomNavigationAction from '@mui/material/BottomNavigationAction'
 
 import {
-    MemoryRouter,
-    Route,
-    Routes,
     Link as RouterLink,
     Outlet,
     matchPath,
     useLocation,
   } from 'react-router-dom';
-  import { StaticRouter } from 'react-router-dom/server';
 
-// function Router(props) {
-//     const { children } = props;
-//     if (typeof window === 'undefined') {
-//         return <StaticRouter location="/home">{children}</StaticRouter>;
-//     }
-
-//     return (
-//         <MemoryRouter initialEntries={['/home']} initialIndex={0}>
-//         {children}
-//         </MemoryRouter>
-//     )
-// }
-  
-// Router.propTypes = {
-// children: PropTypes.node,
-// };
 
 function useRouteMatch(patterns) {
     const { pathname } = useLocation();

@@ -6,17 +6,26 @@ import { Typography } from '@mui/material'
 // --------- Components ----------
 
 // --------- Pages ----------
+import Layout from 'pages/Layout'
+import NotFound from 'pages/NotFound'
+
 import Home from 'pages/Home'
 import Config from 'pages/Config'
 import Regalos from 'pages/Regalos'
-import Layout from 'pages/Layout'
-import NotFound from 'pages/NotFound'
+import DetailGiftGroup from 'src/pages/DetailGiftGroup'
 
 // ------ Reducers -------
 
 // ------ Utils ------
 
 const App = () =>  {
+const gg = {
+  "id": 105,
+  "name": "Bogota, CO-Hospedaje",
+  "type": "ACOMODATION",
+  "numMaxGifts": 5,
+  "cityID": 29
+}
 
   return (
     <HashRouter>
@@ -25,6 +34,7 @@ const App = () =>  {
           <Route index element={<Home/>}/>
           <Route path='config' element={<Config/>}/>
           <Route path='regalos' element={<Regalos/>}/>
+          <Route path='detallePaqueteRegalo/:id' element={<DetailGiftGroup cityName='Bogota' giftGroup={gg}/>} />
           <Route path='*' element={<NotFound/>}></Route>
         </Route>
       </Routes>

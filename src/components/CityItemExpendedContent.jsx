@@ -2,6 +2,9 @@ import React from 'react'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { Accordion, AccordionSummary, AccordionDetails, Box, Typography,Button } from '@mui/material'
 
+import GiftGroupListItem from 'components/GiftGroupListItem'
+
+
 function getGiftTypeName(type){
     switch(type){
         case 'TRANSPORTATION':
@@ -28,13 +31,7 @@ const CityItemExpendedContent = ({giftGroups}) => {
                 <Typography>{gg.name}</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                <Typography>
-                    Tipo regalo: {getGiftTypeName(gg.type)}
-                </Typography>
-                <Typography>
-                    Posibles Regalos: {gg.numMaxGifts} 
-                </Typography>
-                <Button variant='contained'>Detalle</Button>
+                    <GiftGroupListItem giftGroup={gg} />
                 </AccordionDetails>
           </Accordion>
         ))}
