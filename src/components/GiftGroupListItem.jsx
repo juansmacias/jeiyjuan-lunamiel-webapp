@@ -1,11 +1,29 @@
 import React from "react"
-import { Grid, Typography, Chip,Button} from '@mui/material'
+import { useNavigate } from "react-router-dom"
+import { Grid, Typography, Chip, Button, Paper, Box} from '@mui/material'
 import CheckIcon from '@mui/icons-material/Check'
 
 const GiftGroupListItem = ({giftGroup})=>{
+const navigate = useNavigate()
+
+function goToDetail(id){
+    navigate(`/detallePaqueteRegalo/${id}`)
+}
 
 return (
-<Grid container spacing={2}>
+<Box
+      sx={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        '& > :not(style)': {
+          m: 1,
+          p:2,
+          width: '100%',
+        },
+      }}
+>
+<Paper variant="outlined" elevation={3}>    
+<Grid container spacing={1}>
     <Grid item xs={12} container spacing={1} direction='column'>
         <Grid item xs={10} > 
             <Typography variant="subtitle1">{giftGroup.name}</Typography>
@@ -14,7 +32,7 @@ return (
             <Typography variant="body">Regalos:{giftGroup.numMaxGifts}</Typography>
         </Grid>
     </Grid>
-    <Grid item xs={12}>
+    {/* <Grid item xs={12} container spacing={1} direction='column'>
         <Grid item xs={10} > 
             <Typography variant="body1">{giftGroup.type}</Typography>
         </Grid>
@@ -23,13 +41,16 @@ return (
           color='primary' 
           variant='outlined' />
         </Grid>
-    </Grid>
+    </Grid> */}
     <Grid item xs={12}>
-        <Button variant="outline" fullWidth>
+        <Button variant="contained" fullWidth 
+        onClick={()=>{goToDetail(giftGroup.id)}}>
             Ver Detalle
         </Button>
     </Grid>
-</Grid>)
+</Grid>
+</Paper>
+</Box>)
 }
 
 export default GiftGroupListItem

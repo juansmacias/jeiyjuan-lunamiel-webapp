@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react'
-import { Grid, Typography,Button } from '@mui/material'
+import { Stack, Typography,Button } from '@mui/material'
+
+import ConfigList from 'components/ConfigList'
+
 
 // ------- Hooks ----
 
 export default function Config (){
     return (
-        <Grid container spacing={3} alignItems='center'>
-            <Grid item xs={12} textAlign='center' sx={{mt:3}}>
-                <Typography variant='h2'>
-                    Hola Config
-                </Typography>
-            </Grid>
-        </Grid>
+        <Stack spacing={3}>
+            <Typography variant='h2' textAlign={'center'} sx={{mt:2}}> Configuraciones </Typography>
+            <ConfigList/>
+        </Stack>
     )
 } 

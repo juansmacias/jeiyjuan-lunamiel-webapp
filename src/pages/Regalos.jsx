@@ -1,16 +1,15 @@
 import React, { useEffect } from 'react'
-import { Grid, Typography,Button } from '@mui/material'
+import { Stack, Typography,Button } from '@mui/material'
+
+import GiftList from 'components/GiftList'
 
 // ------- Hooks ----
 
-export default function Config (){
+export default function Regalos (){
     return (
-        <Grid container spacing={3} alignItems='center'>
-            <Grid item xs={12} textAlign='center' sx={{mt:3}}>
-                <Typography variant='h2'>
-                    Hola Regalos
-                </Typography>
-            </Grid>
-        </Grid>
+        <Stack spacing={3}>
+            <Typography variant='h2' textAlign={'center'}> Mis Regalos Reservados</Typography>
+            <GiftList/>
+        </Stack>
     )
 } 

@@ -22,18 +22,19 @@ const CityItemExpendedContent = ({giftGroups}) => {
 
     return (<Box sx={{ width: '100%' }}>
         {giftGroups.map((gg)=>(
-            <Accordion key={gg.id}>
-                <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls={`"Item-"${gg.name}`}
-                id={`"Item-"${gg.name}-header`}
-                >
-                <Typography>{gg.name}</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                    <GiftGroupListItem giftGroup={gg} />
-                </AccordionDetails>
-          </Accordion>
+        //     <Accordion key={gg.id}>
+        //         <AccordionSummary
+        //         expandIcon={<ExpandMoreIcon />}
+        //         aria-controls={`"Item-"${gg.name}`}
+        //         id={`"Item-"${gg.name}-header`}
+        //         >
+        //         <Typography>{gg.name}</Typography>
+        //         </AccordionSummary>
+        //         <AccordionDetails>
+        //             <GiftGroupListItem giftGroup={gg} />
+        //         </AccordionDetails>
+        //   </Accordion>
+        <GiftGroupListItem giftGroup={gg} />
         ))}
     </Box>)
 }
