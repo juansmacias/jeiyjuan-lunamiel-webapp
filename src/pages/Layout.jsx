@@ -61,7 +61,7 @@ const Layout = () => {
                             console.log('new Route: ',newValue)
                         }}
                     >
-                        <BottomNavigationAction component={RouterLink} to="/regalos" label="Regalos" icon={<RedeemIcon />} />
+                        <BottomNavigationAction component={RouterLink} to="/regalos" label="Mis Regalos Reservados" icon={<RedeemIcon />} />
                         <BottomNavigationAction component={RouterLink} to="/" label="Inicio" icon={<HomeIcon />} />
                         <BottomNavigationAction component={RouterLink} to="/config" label="Config" icon={<SettingsIcon />} />
                     </BottomNavigation>

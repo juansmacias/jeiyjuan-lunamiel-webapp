@@ -3,11 +3,11 @@ import logger from 'redux-logger'
 import storage from 'redux-persist/lib/storage'
 import promiseMiddleware from 'redux-promise-middleware'
 import { configureStore } from '@reduxjs/toolkit'
-import { persistStore,persistReducer, FLUSH, REHYDRATE, PAUSE, 
-  PERSIST, PURGE, REGISTER } from 'redux-persist'
+import { persistStore,persistReducer } from 'redux-persist'
 
 import userReducer from 'reducers/user'
 import citiesReducer from 'reducers/cities'
+import giftsReducer from 'reducers/myGifts'
 
 const persistConfig = {
   key: 'root',
@@ -19,7 +19,8 @@ const persistedReducer = persistReducer(persistConfig, userReducer)
 export const store = configureStore({
   reducer: {
     user:persistedReducer,
-    cities: citiesReducer
+    cities: citiesReducer,
+    myGifts: giftsReducer
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger,promiseMiddleware,thunk),
   devTools: process.env.NODE_ENV !== 'production',

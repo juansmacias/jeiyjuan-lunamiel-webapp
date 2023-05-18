@@ -22,7 +22,7 @@ return (
         },
       }}
 >
-<Paper variant="outlined" elevation={3}>    
+<Paper variant="outlined">    
 <Grid container spacing={1}>
     <Grid item xs={12} container spacing={1} direction='column'>
         <Grid item xs={10} > 
