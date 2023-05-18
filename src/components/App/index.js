@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
-import { Routes, HashRouter, Route } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import { Typography } from '@mui/material'
-// import '@nosferatu500/react-sortable-tree/style.css'
+import { Routes, HashRouter, Route } from 'react-router-dom'
 
 // --------- Components ----------
 
@@ -15,7 +15,7 @@ import Regalos from 'pages/Regalos'
 import DetailGiftGroup from 'src/pages/DetailGiftGroup'
 
 // ------ Reducers -------
-
+import { fetchCities } from 'reducers/cities'
 // ------ Utils ------
 
 const App = () =>  {
@@ -24,8 +24,23 @@ const gg = {
   "name": "Bogota, CO-Hospedaje",
   "type": "ACOMODATION",
   "numMaxGifts": 5,
-  "cityID": 29
+  "cityID": 29,
+  "gifts":[{
+    "id": 1,
+    "createdAt": "2023-05-10T19:03:29.555Z",
+    "updatedAt": "2023-05-10T19:03:29.555Z",
+    "memberName": "FAM Macias & Morillo",
+    "amount": "100000",
+    "currency": "COP",
+    "isPrivate": false,
+    "giftGroupID": 5
+}]
 }
+  const dispatch = useDispatch()
+
+  useEffect(()=>{
+      dispatch(fetchCities())
+    })
 
   return (
     <HashRouter>
@@ -43,4 +58,4 @@ const gg = {
 }
 
 
-export default App;
+export default App

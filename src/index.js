@@ -7,15 +7,21 @@ import { PersistGate } from 'redux-persist/integration/react'
 
 import theme from 'theme'
 import App from 'components/App'
+import { store, persistor } from 'store'
 import reportWebVitals from 'reportWebVitals'
 
 const container = document.getElementById('root')
 const root = createRoot(container)
 
 root.render(
-  <ThemeProvider theme={theme}>
-      <App />
-  </ThemeProvider>
+  <Provider store={store}>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <PersistGate loading={null} persistor={persistor}>
+        <App />
+      </PersistGate>
+    </ThemeProvider>
+  </Provider>
 )
 
 reportWebVitals();
