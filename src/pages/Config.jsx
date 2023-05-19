@@ -8,8 +8,8 @@ import ConfigList from 'components/ConfigList'
 
 export default function Config (){
     return (
-        <Stack spacing={3}>
-            <Typography variant='h2' textAlign={'center'} sx={{mt:2}}> Configuraciones </Typography>
+        <Stack spacing={3} alignItems={'center'}>
+            <Typography variant='h2' sx={{mt:2}}> Configuraciones </Typography>
             <ConfigList/>
         </Stack>
     )

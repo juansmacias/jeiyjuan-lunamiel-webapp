@@ -1,7 +1,7 @@
 import React from "react"
 import { useSelector } from "react-redux"
 import { styled } from '@mui/material/styles'
-import { Stack,Paper } from "@mui/material"
+import { Stack,Paper,Typography } from "@mui/material"
 
 // ---- Components ------
 import GiftListItem from 'components/GiftListItem'
@@ -14,18 +14,20 @@ const Item = styled(Paper)(({ theme }) => ({
     padding: theme.spacing(1),
     textAlign: 'left',
     color: theme.palette.text.secondary,
+    width:'75%'
   }));
 
 const GiftList = () =>{
     const gifts = useSelector(selectMyGifts)
 
     return(
-        <Stack spacing={2}>
-        {gifts.map((g)=>(
-            <Item key={g.id}>
-                <GiftListItem gift={g}/>
-            </Item>
-        ))}
+        <Stack spacing={2} alignItems={'center'}>
+            <Typography variant='h2' sx={{mt:2}}>Mis Regalos Reservados</Typography>
+            {gifts.map((g)=>(
+                <Item key={g.id}>
+                    <GiftListItem gift={g} giftGroupName={g.giftGroup?.name}/>
+                </Item>
+            ))}
         </Stack>
     )
 }

@@ -18,9 +18,11 @@ import DetailGiftGroup from 'src/pages/DetailGiftGroup'
 
 //----  Components -------
 import Onboarding from '../Onboarding'
+import Onboarding2 from '../Onboarding2'
 
-// ------ Reducers -------
+// ---- Async Action Thunk
 import { fetchCities } from 'reducers/cities'
+import { fetchMyGifts } from 'reducers/myGifts'
 // ------ Utils ------
 
 const App = () =>  {
@@ -28,6 +30,7 @@ const App = () =>  {
 
   useEffect(()=>{
       dispatch(fetchCities())
+      dispatch(fetchMyGifts())
   },[])
 
   return (
@@ -37,6 +40,7 @@ const App = () =>  {
           <Route element={<RequireAuth/>}>
             <Route index element={<Home/>}/>
             <Route path='config' element={<Config/>}/>
+            <Route path='config/instrucciones' element={<Onboarding2/>}/>
             <Route path='regalos' element={<Regalos/>}/>
             <Route path='detallePaqueteRegalo/:id' element={<DetailGiftGroup/>} />
           </Route>

@@ -34,7 +34,7 @@ const Onboarding = () => {
         <Grid item xs={12}>
             <Stack spacing={2}> 
                 <Typography variant='subtitle1' textAlign={'center'}> Gracias por querer apoyarnos en la luna de miel!</Typography>
-                <Typography variant='body 1' textAlign={'center'}> Antes de comenzar queremos pedirles unos datos y contarles que aca pueden buscar los detalles que nos guataria recibir de usted</Typography>
+                <Typography variant='body1' textAlign={'center'}> Antes de comenzar queremos pedirles unos datos y contarles que aca pueden buscar los detalles que nos gustaria recibir de usted.</Typography>
                 <FormProvider {...formMethods}>
                 <form onSubmit={handleSubmit(onSubmit)} id='onboardingForm'>
                     <BasicTextField name="memberName" label="Nombre Familia/Invitado" type="text" required fullWidth sx={{mb:4}}></BasicTextField>

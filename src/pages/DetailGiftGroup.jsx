@@ -11,6 +11,16 @@ import GiftRegistration from 'components/GiftRegistration'
 // ----- API --------
 import { getGiftGroupById } from '../api/giftgroup'
 
+// ----- Hooks -------
+import { useFindMyGifts } from 'hooks/useFindMyGifts'
+
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  width:'50%',
+  color: theme.palette.text.secondary,
+}))
 
 const DetailGiftGroup = ()=>{
   const { id } = useParams()
@@ -19,6 +29,7 @@ const DetailGiftGroup = ()=>{
   const [ isLoading,setIsLoading ] = useState(true)
   const [openBackdrop, setOpenBackdrop] = useState(false)
 
+  const currentMyGift = useFindMyGifts(id)
 
   const handleClose = () => {
     setOpenBackdrop(false)
@@ -65,19 +76,21 @@ return (<Box sx={{ width: '100%', paddingBottom:10 }}>
     <Box>
       <Typography textAlign= 'center' variant='h2'>{giftGroup?.name}</Typography>
       <Typography align= 'center' variant='h4'>Regalos recibidos</Typography>
-      <Paper variant="outlined">
+      <Stack spacing={3} alignItems={'center'}>
         {giftGroup?.gifts.length===0&&(
           <Typography align= 'center' variant='h5'>Sin Regalos</Typography>
         )}
         {giftGroup?.gifts.map((g)=>(
-          <GiftListItem key={g.id} gift={g}/>
+          <Item>
+            <GiftListItem key={g.id} gift={g} giftGroupName={giftGroup?.name}/>
+          </Item>
         ))}
-      </Paper>  
-      {giftGroup?.gifts.length<giftGroup?.numMaxGifts&&(
+      </Stack>  
+      {giftGroup?.gifts.length<giftGroup?.numMaxGifts&&!currentMyGift&&(
         <Box>
           <Typography align= 'center' variant='h4'>Reservar Regalo</Typography>
           <Paper variant="outlined">
-            <GiftRegistration />
+            <GiftRegistration giftGroupName={giftGroup?.name} />
           </Paper>
         </Box>
       )}

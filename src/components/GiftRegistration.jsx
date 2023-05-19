@@ -1,26 +1,48 @@
 import React from "react"
-import { Typography,Stack,Button  } from "@mui/material"
+import { useNavigate } from "react-router-dom"
+import { useDispatch,useSelector } from "react-redux"
+import { Typography,Stack,Button,Box  } from "@mui/material"
 import { FormProvider,useForm } from 'react-hook-form'
 
+// ------------------ Components ------------------
 import BasicCheckbox from 'components/Fields/BasicCheckbox'
 import BasicTextField from 'components/Fields/BasicTextField'
 import BasicSelect from 'components/Fields/BasicSelect'
 
+// ------------------ Async Thunks ------------------
+import { createMyGifts } from 'reducers/myGifts'
 
-const GiftRegistration = () =>{
+import { selectMemberName } from 'reducers/user'
 
-    const formMethods = useForm()
+// { memberName,amount,currency,isPrivate,giftGroupName}
+
+const GiftRegistration = ({giftGroupName}) =>{
+    const formMethods = useForm({
+        defaultValues: {
+            isPrivate: false,
+          }
+    })
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
     const { handleSubmit } = formMethods
+    const memberName = useSelector(selectMemberName)
 
-    return (<Stack spacing={2}>
-        <Typography variant="body2">Aca pueden registar o reservar sus regalos</Typography>
+    const onSubmit = (data) => {
+        Object.assign(data,{memberName:memberName,giftGroupName:giftGroupName})
+        dispatch(createMyGifts(data))
+        navigate('/regalos')
+    } 
+
+    return (<Stack spacing={2} alignItems="center">
+        <Typography variant="subtitle1" textAlign={'center'}>Aca pueden registar o reservar sus regalos</Typography>
         <FormProvider { ...formMethods }>
-        <form onSubmit={handleSubmit(()=>{console.log('hola print')})}>
+        <form onSubmit={handleSubmit(onSubmit)}>
             <BasicTextField name="amount" label="Cantidad" type="number" required fullWidth sx={{mb:4}}></BasicTextField>
-            <BasicSelect name={'currency'} options={['COP','USD']} sx={{mb:4}}></BasicSelect>
-            <BasicTextField name="mensaje" label="Mensaje" type="text" required fullWidth multiline rows={4} sx={{mb:4}}></BasicTextField>
-            <BasicCheckbox label='Quieres que sea privado?'></BasicCheckbox>
-            <Button type='submit' fullWidth color='primary' variant='contained'>Continuar</Button>
+            <BasicSelect name='currency' label='Moneda' options={['COP','USD']} sx={{mb:4}}></BasicSelect>
+            <BasicTextField name="message" label="Mensaje" type="text" optionalvalue={'true'} fullWidth multiline rows={5} sx={{mb:4}}></BasicTextField>
+            <Typography variant="h5" textAlign={'center'}>Quieres que sea privado tu valor y mensaje?</Typography>
+            <Box alignContent={'center'}><BasicCheckbox name="isPrivate" textAlign="center"></BasicCheckbox></Box>
+            <Button type='submit' fullWidth color='primary' variant='contained'>Enviar</Button>
         </form>
         </FormProvider>
     </Stack>)

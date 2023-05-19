@@ -11,17 +11,17 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
   }));
 
-const GiftListItem = ({gift}) =>{
+const GiftListItem = ({gift,giftGroupName}) =>{
 
     return (
     <Stack spacing={2}>
         <Grid container spacing={2} direction='column'>
             <Grid item xs={12} container spacing={2}>
                 <Grid item xs={12}>
-                    <Typography variant='h4'>Regalo de {gift.memberName}</Typography>
+                    <Typography variant='h4'>Regalo para {giftGroupName}</Typography>
                 </Grid>
                 <Grid item xs={12}>
-                    <Typography variant='subtitle1'>Cantidad: {gift.amount} {gift.currency}</Typography>
+                    <Typography variant='subtitle1'>De: {gift.memberName} Por Cantidad: {gift.amount} {gift.currency}</Typography>
                 </Grid>
             </Grid>
         </Grid>

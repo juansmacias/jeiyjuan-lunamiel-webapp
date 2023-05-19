@@ -11,6 +11,14 @@ export const fetchMyGifts = createAsyncThunk(
     }
   )
 
+  export const createMyGifts = createAsyncThunk(
+    'gifts/createGifts',
+    async ({ memberName,amount,currency,isPrivate,giftGroupName}) => {
+      const response = await api.postGift({ memberName,amount,currency,isPrivate,giftGroupName})
+      return response.data
+    }
+  )
+
 const giftSlice  = createSlice({
     name:'gifts',
     initialState:[],
@@ -19,6 +27,10 @@ const giftSlice  = createSlice({
       builder.addCase(fetchMyGifts.fulfilled, (state, action) => {
         console.log('fetchMyGifts.fulfilled: ',action.payload)
         return action.payload 
+      })
+      builder.addCase(createMyGifts.fulfilled, (state, action) => {
+        console.log('createMyGifts.fulfilled: ',action.payload)
+        state.push(action.payload)
       })
     },
   })
