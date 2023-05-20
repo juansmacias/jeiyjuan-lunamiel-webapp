@@ -34,7 +34,7 @@ const CityItemExpendedContent = ({giftGroups}) => {
         //             <GiftGroupListItem giftGroup={gg} />
         //         </AccordionDetails>
         //   </Accordion>
-        <GiftGroupListItem giftGroup={gg} />
+        <GiftGroupListItem key={gg.id} giftGroup={gg} />
         ))}
     </Box>)
 }

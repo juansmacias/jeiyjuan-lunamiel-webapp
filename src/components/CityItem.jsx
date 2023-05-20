@@ -37,7 +37,7 @@ const CityItem = ({city}) => {
         <CardMedia
           component="img"
           height="194"
-          image="/static/images/bogota.jpeg"
+          image={city.photoUrl}
           alt="Bogota"
         />
         <CardContent>

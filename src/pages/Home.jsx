@@ -7,13 +7,6 @@ import CityList from 'components/CityList'
 
 export default function Home (){
     return (
-        // <Grid container spacing={1} alignItems='center'>
-        //     <Grid item xs={12} textAlign='center' sx={{mt:3}}>
-        //         <Typography variant='h2'>
-        //             Hola Inicio
-        //         </Typography>
-        //     </Grid>
-        // </Grid>
         <CityList/>
     )
 } 

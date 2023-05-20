@@ -1,10 +1,8 @@
 import React from "react"
 import { Paper,Typography,IconButton } from "@mui/material"
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
-
 
 const BasicListItem = (props) =>{
-    const {title,icon,onClicK} = props
+    const {title,icon,onClick} = props
     return (
         <Paper
           sx={{
@@ -32,6 +30,7 @@ const BasicListItem = (props) =>{
               width: '48px',
               height: '48px',
             }}
+            onClick={onClick}
           >
             {icon}
           </IconButton>

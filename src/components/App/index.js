@@ -1,40 +1,59 @@
 import React, { useEffect } from 'react'
-import { Routes, HashRouter, Route } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import { Typography } from '@mui/material'
-// import '@nosferatu500/react-sortable-tree/style.css'
+import { Routes, HashRouter, Route } from 'react-router-dom'
 
 // --------- Components ----------
 
-// --------- Pages ----------
+// --------- Layout ----------
 import Layout from 'pages/Layout'
+import OnlyInAuth from './OnlyInAuth'
 import NotFound from 'pages/NotFound'
-
+import RequireAuth from './RequireAuth'
+//------ Pages ----
 import Home from 'pages/Home'
 import Config from 'pages/Config'
 import Regalos from 'pages/Regalos'
 import DetailGiftGroup from 'src/pages/DetailGiftGroup'
 
-// ------ Reducers -------
+//----  Components -------
+import Onboarding from '../Onboarding'
+import OnboardingStep2 from '../OnboardingStep2'
 
-// ------ Utils ------
+// ---- Async Action Thunk
+import { fetchCities } from 'reducers/cities'
+import { fetchMyGifts } from 'reducers/myGifts'
+// -------  Hook ---------
+import useAuth from 'hooks/useAuth'
 
 const App = () =>  {
-const gg = {
-  "id": 105,
-  "name": "Bogota, CO-Hospedaje",
-  "type": "ACOMODATION",
-  "numMaxGifts": 5,
-  "cityID": 29
-}
+  const auth = useAuth()
+  const dispatch = useDispatch()
+
+  useEffect(()=>{
+      dispatch(fetchCities())
+  },[])
+
+  useEffect(()=>{
+    if(auth.finishedOnboarding){
+      dispatch(fetchMyGifts())
+    }
+  },[auth.finishedOnboarding])
 
   return (
     <HashRouter>
       <Routes>
         <Route path="/*" element={<Layout />}>
-          <Route index element={<Home/>}/>
-          <Route path='config' element={<Config/>}/>
-          <Route path='regalos' element={<Regalos/>}/>
-          <Route path='detallePaqueteRegalo/:id' element={<DetailGiftGroup cityName='Bogota' giftGroup={gg}/>} />
+          <Route element={<RequireAuth/>}>
+            <Route index element={<Home/>}/>
+            <Route path='config' element={<Config/>}/>
+            <Route path='config/instrucciones' element={<OnboardingStep2 isinstruccions={'true'}/>}/>
+            <Route path='regalos' element={<Regalos/>}/>
+            <Route path='detallePaqueteRegalo/:id' element={<DetailGiftGroup/>} />
+          </Route>
+          <Route element={<OnlyInAuth/>}>
+            <Route path='onboarding' element={<Onboarding />} />
+          </Route>
           <Route path='*' element={<NotFound/>}></Route>
         </Route>
       </Routes>
@@ -43,4 +62,4 @@ const gg = {
 }
 
 
-export default App;
+export default App

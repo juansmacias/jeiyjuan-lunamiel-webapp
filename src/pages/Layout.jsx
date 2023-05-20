@@ -18,6 +18,7 @@ import {
     useLocation,
   } from 'react-router-dom';
 
+  import Notifications from 'components/Notifications'
 
 function useRouteMatch(patterns) {
     const { pathname } = useLocation();
@@ -52,6 +53,7 @@ const Layout = () => {
                     </Toolbar>
                     </Container>
                 </AppBar>
+                <Notifications />
                 <Outlet />
                 <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
                     <BottomNavigation
@@ -61,7 +63,7 @@ const Layout = () => {
                             console.log('new Route: ',newValue)
                         }}
                     >
-                        <BottomNavigationAction component={RouterLink} to="/regalos" label="Regalos" icon={<RedeemIcon />} />
+                        <BottomNavigationAction component={RouterLink} to="/regalos" label="Mis Regalos Reservados" icon={<RedeemIcon />} />
                         <BottomNavigationAction component={RouterLink} to="/" label="Inicio" icon={<HomeIcon />} />
                         <BottomNavigationAction component={RouterLink} to="/config" label="Config" icon={<SettingsIcon />} />
                     </BottomNavigation>
