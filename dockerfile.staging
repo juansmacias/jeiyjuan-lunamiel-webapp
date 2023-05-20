@@ -1,0 +1,19 @@
+FROM node:16.14-alpine
+
+WORKDIR /app
+
+ENV PATH /app/node_modules/.bin:$PATH
+
+ARG REACT_APP_API_URL=http://192.168.70.99:3030
+
+COPY package.json ./
+COPY package-lock.json ./
+RUN npm ci --silent
+
+COPY . ./
+
+RUN npm run build
+
+RUN npm install -g serve
+
+CMD serve -s build
