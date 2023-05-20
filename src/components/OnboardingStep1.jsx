@@ -38,7 +38,7 @@ const OnboardingStep1 = () => {
                 <FormProvider {...formMethods}>
                 <form onSubmit={handleSubmit(onSubmit)} id='onboardingForm'>
                     <BasicTextField name="memberName" label="Nombre Familia/Invitado" type="text" required fullWidth sx={{mb:4}}></BasicTextField>
-                    <Button type='submit' fullWidth color='primary' variant='contained'>Continuar</Button>
+                    <Button type='submit' fullWidth color='primary' variant='contained' sx={{mb:10}}>Continuar</Button>
                 </form>
                 </FormProvider>
             </Stack>

@@ -25,9 +25,10 @@ const GiftList = () =>{
             <Typography variant='h2' sx={{mt:2}}>Mis Regalos Reservados</Typography>
             {gifts.map((g)=>(
                 <Item key={g.id}>
-                    <GiftListItem gift={g} giftGroupName={g.giftGroup?.name}/>
+                    <GiftListItem gift={g} giftGroupName={g.giftGroup?.name} />
                 </Item>
             ))}
+             <Typography variant='h2' sx={{mt:2}}> <br></br></Typography>
         </Stack>
     )
 }

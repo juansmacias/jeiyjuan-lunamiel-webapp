@@ -9,7 +9,5 @@ import GiftList from 'components/GiftList'
 
 export default function Regalos (){
 
-    return (
-            <GiftList/>
-    )
+    return ( <GiftList />)
 } 

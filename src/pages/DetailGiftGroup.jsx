@@ -1,6 +1,7 @@
 import React, { useEffect,useState } from 'react'
 import { styled } from '@mui/material/styles'
 import { useParams } from 'react-router'
+import { useDispatch } from 'react-redux'
 import { Typography,Box,Paper,Stack,Backdrop,CircularProgress } from '@mui/material'
 
 
@@ -13,6 +14,10 @@ import { getGiftGroupById } from '../api/giftgroup'
 
 // ----- Hooks -------
 import { useFindMyGifts } from 'hooks/useFindMyGifts'
+import { useMyGiftCount } from 'src/hooks/useMyGiftCount'
+
+// ---- Action ------- 
+import { setAlert } from 'reducers/alerts'
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -25,11 +30,13 @@ const Item = styled(Paper)(({ theme }) => ({
 const DetailGiftGroup = ()=>{
   const { id } = useParams()
 
+  const dispatch = useDispatch()
   const [ giftGroup,setGiftGroup ] = useState()
-  const [ isLoading,setIsLoading ] = useState(true)
+  const [ isLoading,setIsLoading ] = useState(false)
   const [openBackdrop, setOpenBackdrop] = useState(false)
 
   const currentMyGift = useFindMyGifts(id)
+  const myGiftCount = useMyGiftCount()
 
   const handleClose = () => {
     setOpenBackdrop(false)
@@ -41,12 +48,16 @@ const handleToggleBackdrop = () => {
 
 async function fetchData(){
   await getGiftGroupById(id).then(response=>{
-    console.log('resultado gg: ',response)
     setGiftGroup(response.data)
     setIsLoading(false)
   }).catch(error=>{
-    console.log('resultado error: ',error)
     setIsLoading(false)
+    dispatch(setAlert({
+      id:Math.floor(Math.random() * 9999),
+      type:'error',
+      message:'Error cargando pagina',
+      duration:5000
+    }))
   })
 }
 
@@ -59,8 +70,9 @@ async function fetchData(){
   },[isLoading])
 
   useEffect(()=>{
+    setIsLoading(true)
     fetchData()
-  },[id])
+  },[id,myGiftCount])
 
 return (<Box sx={{ width: '100%', paddingBottom:10 }}>
   <Stack spacing={2}>

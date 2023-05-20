@@ -1,7 +1,7 @@
 import React from 'react'
 import { styled } from '@mui/material/styles'
 
-import { Typography,Stack,Grid,Paper,Chip } from '@mui/material'
+import { Typography,Stack,Grid,Paper} from '@mui/material'
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -12,7 +12,7 @@ const Item = styled(Paper)(({ theme }) => ({
   }));
 
 const GiftListItem = ({gift,giftGroupName}) =>{
-
+    console.log('gift: ',gift)
     return (
     <Stack spacing={2}>
         <Grid container spacing={2} direction='column'>
@@ -21,8 +21,19 @@ const GiftListItem = ({gift,giftGroupName}) =>{
                     <Typography variant='h4'>Regalo para {giftGroupName}</Typography>
                 </Grid>
                 <Grid item xs={12}>
-                    <Typography variant='subtitle1'>De: {gift.memberName} Por Cantidad: {gift.amount} {gift.currency}</Typography>
+                    {gift.isPrivate?
+                    <Typography variant='subtitle1'>De: {gift.memberName} </Typography>:
+                    <Typography variant='subtitle1'>De: {gift.memberName} por: {gift.amount} {gift.currency}</Typography>}
                 </Grid>
+                {!gift.isPrivate&&gift.message&&
+                <Grid item xs={12} container spacing={2}>
+                    <Grid item xs={12}>
+                        <Typography variant='subtitle1'>Asunto: </Typography>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Typography variant='body1' textAlign={'center'}>{gift.message} </Typography>
+                    </Grid>
+                </Grid>}
             </Grid>
         </Grid>
     </Stack>)
