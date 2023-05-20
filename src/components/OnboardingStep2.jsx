@@ -15,18 +15,15 @@ import LocalActivityIcon from '@mui/icons-material/LocalActivity'
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
 
 
-// ------ Components -------
-import BasicTextField from 'components/Fields/BasicTextField'
-
 // ------ Actions -----------
-import { setMemberName } from 'reducers/user'
+import { nextOnboardingStep } from 'reducers/user'
 
-const Onboarding2 = () => {
+const OnboardingStep2 = ({isinstruccions='false'}) => {
 
     const dispatch = useDispatch()
     
     const onContinue = () => { 
-
+        dispatch(nextOnboardingStep())
     }
 
     return (<Grid container spacing={2} sx={{pb:8}}>
@@ -118,11 +115,12 @@ const Onboarding2 = () => {
                     </ListItem>
                 </List>
                 <Typography variant='body1' textAlign={'center'} sx={{ml:5,mr:5}}>Disculpen todo este texto. Se le quiere.</Typography>
-                <Button fullWidth color='primary' variant='contained'>Continuar</Button>
+                {isinstruccions==='false'&&<Button fullWidth color='primary' variant='contained' onClick={onContinue}>Continuar</Button>
+}
 
             </Stack>
         </Grid>
     </Grid>)
 }
 
-export default Onboarding2
+export default OnboardingStep2

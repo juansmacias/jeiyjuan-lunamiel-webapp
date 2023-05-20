@@ -18,20 +18,27 @@ import DetailGiftGroup from 'src/pages/DetailGiftGroup'
 
 //----  Components -------
 import Onboarding from '../Onboarding'
-import Onboarding2 from '../Onboarding2'
+import OnboardingStep2 from '../OnboardingStep2'
 
 // ---- Async Action Thunk
 import { fetchCities } from 'reducers/cities'
 import { fetchMyGifts } from 'reducers/myGifts'
-// ------ Utils ------
+// -------  Hook ---------
+import useAuth from 'hooks/useAuth'
 
 const App = () =>  {
+  const auth = useAuth()
   const dispatch = useDispatch()
 
   useEffect(()=>{
       dispatch(fetchCities())
-      dispatch(fetchMyGifts())
   },[])
+
+  useEffect(()=>{
+    if(auth.finishedOnboarding){
+      dispatch(fetchMyGifts())
+    }
+  },[auth.finishedOnboarding])
 
   return (
     <HashRouter>
@@ -40,7 +47,7 @@ const App = () =>  {
           <Route element={<RequireAuth/>}>
             <Route index element={<Home/>}/>
             <Route path='config' element={<Config/>}/>
-            <Route path='config/instrucciones' element={<Onboarding2/>}/>
+            <Route path='config/instrucciones' element={<OnboardingStep2 isinstruccions={'true'}/>}/>
             <Route path='regalos' element={<Regalos/>}/>
             <Route path='detallePaqueteRegalo/:id' element={<DetailGiftGroup/>} />
           </Route>

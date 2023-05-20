@@ -2,13 +2,13 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Navigate,Outlet } from 'react-router-dom'
 
-// -------  Selector ---------
-import { selectMemberName } from 'reducers/user'
-
+// -------  Hook ---------
+import useAuth from 'hooks/useAuth'
 
 const RequireAuth = () => {
-  const memberName = useSelector(selectMemberName)
-  return memberName!=='N/A' ? 
+  const auth = useAuth()
+
+  return auth.finishedOnboarding ? 
     (<Outlet/>):
     (<Navigate to="/onboarding"/>)
 
